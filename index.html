@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema Agropecuário</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-tractor"></i> AgroSys</h1>
+            <nav>
+                <ul>
+                    <li><a href="#" class="active" data-section="dashboard"><i class="fas fa-home"></i> Dashboard</a></li>
+                    <li><a href="#" data-section="animais"><i class="fas fa-cow"></i> Animais</a></li>
+                    <li><a href="#" data-section="producao"><i class="fas fa-wheat-alt"></i> Produção</a></li>
+                    <li><a href="#" data-section="estoque"><i class="fas fa-warehouse"></i> Estoque</a></li>
+                    <li><a href="#" data-section="relatorios"><i class="fas fa-chart-bar"></i> Relatórios</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <main>
+            <!-- Seção Dashboard -->
+            <section id="dashboard" class="section active">
+                <h2>Dashboard</h2>
+                <div class="cards">
+                    <div class="card">
+                        <h3>Total de Animais</h3>
+                        <p id="total-animais">0</p>
+                    </div>
+                    <div class="card">
+                        <h3>Produção Mensal</h3>
+                        <p id="producao-mensal">0 L</p>
+                    </div>
+                    <div class="card">
+                        <h3>Estoque Atual</h3>
+                        <p id="estoque-atual">0 kg</p>
+                    </div>
+                </div>
+                <div class="grafico">
+                    <canvas id="producaoChart"></canvas>
+                </div>
+            </section>
+
+            <!-- Seção Animais -->
+            <section id="animais" class="section">
+                <h2>Gestão de Animais</h2>
+                <div class="form-container">
+                    <h3>Cadastrar Novo Animal</h3>
+                    <form id="form-animal">
+                        <div class="form-group">
+                            <label for="animal-id">Identificação:</label>
+                            <input type="text" id="animal-id" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="animal-tipo">Tipo:</label>
+                            <select id="animal-tipo" required>
+                                <option value="">Selecione</option>
+                                <option value="bovino">Bovino</option>
+                                <option value="suino">Suíno</option>
+                                <option value="ave">Ave</option>
+                                <option value="caprino">Caprino</option>
+                                <option value="ovino">Ovino</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="animal-raca">Raça:</label>
+                            <input type="text" id="animal-raca" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="animal-nascimento">Data Nascimento:</label>
+                            <input type="date" id="animal-nascimento" required>
+                        </div>
+                        <button type="submit">Cadastrar</button>
+                    </form>
+                </div>
+                <div class="tabela-container">
+                    <h3>Animais Cadastrados</h3>
+                    <table id="tabela-animais">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Tipo</th>
+                                <th>Raça</th>
+                                <th>Nascimento</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Dados serão inseridos via JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Seção Produção -->
+            <section id="producao" class="section">
+                <h2>Controle de Produção</h2>
+                <div class="form-container">
+                    <h3>Registrar Produção</h3>
+                    <form id="form-producao">
+                        <div class="form-group">
+                            <label for="producao-tipo">Tipo:</label>
+                            <select id="producao-tipo" required>
+                                <option value="">Selecione</option>
+                                <option value="leite">Leite</option>
+                                <option value="ovos">Ovos</option>
+                                <option value="carne">Carne</option>
+                                <option value="lã">Lã</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="producao-quantidade">Quantidade:</label>
+                            <input type="number" id="producao-quantidade" step="0.01" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="producao-data">Data:</label>
+                            <input type="date" id="producao-data" required>
+                        </div>
+                        <button type="submit">Registrar</button>
+                    </form>
+                </div>
+                <div class="tabela-container">
+                    <h3>Histórico de Produção</h3>
+                    <table id="tabela-producao">
+                        <thead>
+                            <tr>
+                                <th>Tipo</th>
+                                <th>Quantidade</th>
+                                <th>Data</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Dados serão inseridos via JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Seção Estoque -->
+            <section id="estoque" class="section">
+                <h2>Gestão de Estoque</h2>
+                <div class="form-container">
+                    <h3>Adicionar ao Estoque</h3>
+                    <form id="form-estoque">
+                        <div class="form-group">
+                            <label for="estoque-item">Item:</label>
+                            <input type="text" id="estoque-item" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="estoque-quantidade">Quantidade:</label>
+                            <input type="number" id="estoque-quantidade" step="0.01" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="estoque-unidade">Unidade:</label>
+                            <select id="estoque-unidade" required>
+                                <option value="kg">kg</option>
+                                <option value="L">L</option>
+                                <option value="un">un</option>
+                                <option value="sc">saca</option>
+                            </select>
+                        </div>
+                        <button type="submit">Adicionar</button>
+                    </form>
+                </div>
+                <div class="tabela-container">
+                    <h3>Itens em Estoque</h3>
+                    <table id="tabela-estoque">
+                        <thead>
+                            <tr>
+                                <th>Item</th>
+                                <th>Quantidade</th>
+                                <th>Unidade</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Dados serão inseridos via JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Seção Relatórios -->
+            <section id="relatorios" class="section">
+                <h2>Relatórios</h2>
+                <div class="relatorios-container">
+                    <div class="filtros">
+                        <h3>Filtrar Relatório</h3>
+                        <form id="form-relatorio">
+                            <div class="form-group">
+                                <label for="relatorio-tipo">Tipo de Relatório:</label>
+                                <select id="relatorio-tipo" required>
+                                    <option value="producao">Produção</option>
+                                    <option value="animais">Animais</option>
+                                    <option value="estoque">Estoque</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="relatorio-periodo">Período:</label>
+                                <select id="relatorio-periodo" required>
+                                    <option value="semanal">Semanal</option>
+                                    <option value="mensal">Mensal</option>
+                                    <option value="anual">Anual</option>
+                                    <option value="personalizado">Personalizado</option>
+                                </select>
+                            </div>
+                            <div class="form-group" id="custom-dates" style="display: none;">
+                                <label for="relatorio-data-inicio">Data Início:</label>
+                                <input type="date" id="relatorio-data-inicio">
+                                <label for="relatorio-data-fim">Data Fim:</label>
+                                <input type="date" id="relatorio-data-fim">
+                            </div>
+                            <button type="submit">Gerar Relatório</button>
+                        </form>
+                    </div>
+                    <div class="resultado-relatorio">
+                        <h3>Resultado</h3>
+                        <div id="relatorio-resultado">
+                            <p>Selecione os filtros e gere um relatório.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Modal para confirmação -->
+    <div id="confirm-modal" class="modal">
+        <div class="modal-content">
+            <p id="modal-message">Tem certeza que deseja excluir este item?</p>
+            <div class="modal-buttons">
+                <button id="modal-cancel">Cancelar</button>
+                <button id="modal-confirm">Confirmar</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
